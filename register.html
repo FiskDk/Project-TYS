@@ -1,0 +1,67 @@
+<html>
+    <body>
+        <input type="text" id="usernamein">
+<input type="text" id="emailin">
+<input type="pass" id="passin">
+<input type="button" id="register" value="Register">
+
+
+
+            <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCLrAxZyRc5Bg_BmsqwX_hNbpIJwwcdlac",
+    authDomain: "b0x-788f8.firebaseapp.com",
+    databaseURL: "https://b0x-788f8.firebaseio.com",
+    projectId: "b0x-788f8",
+    storageBucket: "b0x-788f8.appspot.com",
+    messagingSenderId: "1078764008388",
+    appId: "1:1078764008388:web:cf8c59c8fb059ce9ec6a91",
+    measurementId: "G-ZD73C9E8H5"
+  };
+</script>
+        <script>
+
+             firebase.initializeApp(firebaseConfig);
+    
+    document.getElementById("register").addEventListener("click", function() {
+       firebase.auth().createUserWithEmailAndPassword(document.getElementById("emailin").value, document.getElementById("passin").value)
+.then(function(result) {
+  return result.user.updateProfile({
+    displayName: document.getElementById("usernamein").value
+  })
+       //User has been regostered
+       console.log("User has been registered!")
+}).catch(function(error) {
+  console.log(error);
+});
+    })
+    
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var displayName = user.displayName;
+    var email = user.email;
+    var emailVerified = user.emailVerified;
+    var photoURL = user.photoURL;
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    var providerData = user.providerData;
+    // ...
+      console.log("Logged in!")
+  } else {
+    // User is signed out.
+    // ...
+      console.log("Not logged in :c")
+  }
+});
+        </script>
+    </body>
+</html>

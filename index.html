@@ -1,0 +1,98 @@
+<html>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="main.css">
+<body>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+
+<script>
+    var rimgurl = ""
+    const imgurl="https://api.furry.bot/v2/furry/nsfw/yiff/gay"
+$.getJSON(imgurl, function(result){
+    console.log(result)
+    console.log(result.images[0].url)
+    var div = document.createElement("img")
+    div.id="img"
+    div.src=result.images[0].url
+    rimgurl=result.images[0].url
+    document.body.appendChild(div)
+})
+
+//Save to my stash button
+
+//Next button
+
+//Fullscreen
+
+//My Stash button
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCLrAxZyRc5Bg_BmsqwX_hNbpIJwwcdlac",
+    authDomain: "b0x-788f8.firebaseapp.com",
+    databaseURL: "https://b0x-788f8.firebaseio.com",
+    projectId: "b0x-788f8",
+    storageBucket: "b0x-788f8.appspot.com",
+    messagingSenderId: "1078764008388",
+    appId: "1:1078764008388:web:cf8c59c8fb059ce9ec6a91",
+    measurementId: "G-ZD73C9E8H5"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  var database = firebase.database();
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var displayName = user.displayName;
+    var email = user.email;
+    var emailVerified = user.emailVerified;
+    var photoURL = user.photoURL;
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    var providerData = user.providerData;
+    // ...
+      console.log("Logged in!")
+      //Redirect user to main page
+  } else {
+    // User is signed out.
+    // ...
+      console.log("Not logged in :c")
+      //Redirect user to login page
+      location.href = "./login.html"
+  }
+});
+  // Set the configuration for your app
+  // TODO: Replace with your project's config object
+  //EXAMPLE
+  //addToStash("JayyOwO","https://i.furcdn.net/V2/furry/nsfw/yiff/gay/qQu0rZbJ020h3B1pFSkiw8pyfwoZIx.png");
+
+  function addToStash(userid, url) {
+      url=rimgurl
+      userid=firebase.auth().currentUser.displayName
+id = btoa(url)
+  firebase.database().ref('users/' + userid + "/" + id).set({
+    url: url
+  });
+}
+  function dev_addToStash(userId, url) {
+id = btoa(url)
+  firebase.database().ref('users/' + userId + "/" + id).set({
+    url: url
+  });
+}
+
+function next(){
+    location.href= location.href;
+}
+</script>
+</body>
+    </html>

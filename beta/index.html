@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ProjectTYS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+
+<body style="background-color: #311d3f;">
+    <header></header>
+    <div class="login-dark">
+        <form method="post" style="padding-top: 23px;margin-top: -181px;">
+            <p class="text-left d-flex justify-content-center" style="color: rgb(41,128,239);font-family: 'Archivo Black', sans-serif;">Project TYS - Early Access<br></p>
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+            <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Email" id="usernamein"></div>
+            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" id="passin"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="button" id="login">Log In</button></div><a href="#" id="registerBtn" class="forgot">Dont have an account yet?</a></form>
+    </div>            <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCLrAxZyRc5Bg_BmsqwX_hNbpIJwwcdlac",
+    authDomain: "b0x-788f8.firebaseapp.com",
+    databaseURL: "https://b0x-788f8.firebaseio.com",
+    projectId: "b0x-788f8",
+    storageBucket: "b0x-788f8.appspot.com",
+    messagingSenderId: "1078764008388",
+    appId: "1:1078764008388:web:cf8c59c8fb059ce9ec6a91",
+    measurementId: "G-ZD73C9E8H5"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+    
+    document.getElementById("login").addEventListener("click", function() {
+     console.log("Login button clicked")
+  firebase.auth().signInWithEmailAndPassword(document.getElementById("usernamein").value, document.getElementById("passin").value).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+    })
+document.getElementById("registerBtn").addEventListener("click", function() {
+    location.href = "./register.html"
+    });
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var displayName = user.displayName;
+    var email = user.email;
+    var emailVerified = user.emailVerified;
+    var photoURL = user.photoURL;
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    var providerData = user.providerData;
+    // ...
+      console.log("Logged in!")
+      location.href = "./Home.html"
+  } else {
+    // User is signed out.
+    // ...
+      console.log("Not logged in :c")
+  }
+});
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+        <script src="./request.js"></script>
+    </head>
+    <bbody>
+
+        <script>
+            const request = requirejs(['request']);
+
+const options = {
+  url: 'https://api.furry.bot/v2/furry/nsfw/yiff/gay',
+  headers: {
+    'User-Agent': 'Project TYS - Server 1'
+  }
+};
+
+function callback(error, response, body) {
+  if (!error && response.statusCode == 200) {
+    const info = JSON.parse(body);
+    console.log(info.stargazers_count + " Stars");
+    console.log(info.forks_count + " Forks");
+  }else{
+      console.log("Error!")
+  }
+}
+
+request(options, callback);
+        </script>
+    </bbody>
+</html>
