@@ -20,7 +20,6 @@
             <p class="text-left d-flex justify-content-center" style="color: rgb(41,128,239);font-family: 'Archivo Black', sans-serif;">Project TYS - Early Access<br></p>
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
-            <div class="form-group"><input class="form-control" type="email" name="username" placeholder="Username" id="usernamein"></div>
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email" id="emailin"></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" id="passin"></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit" id="register">Register</button></div><a href="#" id="loginBtn" class="forgot">Allready have an account?</a></form>
@@ -49,15 +48,11 @@
 
              firebase.initializeApp(firebaseConfig);
       document.getElementById("loginBtn").addEventListener("click", function() {
-         location.href = "./login.html"
+         location.href = "./index.html"
       });
     document.getElementById("register").addEventListener("click", function() {
        firebase.auth().createUserWithEmailAndPassword(document.getElementById("emailin").value, document.getElementById("passin").value)
 .then(function(result) {
-  return result.user.updateProfile({
-    displayName: document.getElementById("usernamein").value
-  })
-       //User has been regostered
        console.log("User has been registered!")
 }).catch(function(error) {
   console.log(error);
@@ -76,6 +71,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     var providerData = user.providerData;
     // ...
       console.log("Logged in!")
+      location.href="./index.html"
   } else {
     // User is signed out.
     // ...
